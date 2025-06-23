@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block stylesheets %}
+    
+    <link rel="stylesheet" href="{{ asset('//db.onlinewebfonts.com/c/a4e256ed67403c6ad5d43937ed48a77b?family=Core+Sans+N+W01+35+Light') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/inscription.css') }}" type="text/css" />
+{% endblock %}
+
+{% block body %}
+<div class="body-content">
+    <div class="title-container"> <!-- Conteneur pour le titre -->
+        <h3 class="text-center mb-4">Inscription</h3> <!-- Titre -->
+    </div>
+    
+    {{ form_start(form) }}
+    <div class="module">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                  {{ form_label(form.username) }}
+                {{ form_widget(form.username) }}
+                {% if form.username.vars.errors|length > 0 %}
+                    <div class="text-danger">
+                        {{ form.username.vars.errors|first.message }}
+                    </div>
+                {% endif %}
+                
+            </div>
+            <div class="form-group">
+                {{ form_label(form.civilite) }}
+                {{ form_widget(form.civilite) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.nom) }}
+                {{ form_widget(form.nom) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.prenom) }}
+                {{ form_widget(form.prenom) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.telephone) }}
+                {{ form_widget(form.telephone) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.dateDeNaissance) }}
+                {{ form_widget(form.dateDeNaissance) }}
+            </div>
+        </div>
+        <!-- Colonne pour le deuxième cadre -->
+        <div class="col-12 col-md-6"> <!-- Réduit la taille du cadre -->
+            <div class="form-group">
+                {{ form_label(form.adresse) }}
+                {{ form_widget(form.adresse) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.ville) }}
+                {{ form_widget(form.ville) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.codePostal) }}
+                {{ form_widget(form.codePostal) }}
+            </div>
+            <div class="password-fields">
+                <div class="form-group">
+                    {{ form_label(form.password.first) }}
+                    {{ form_widget(form.password.first) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.password.second) }}
+                    {{ form_widget(form.password.second) }}
+                </div>
+                <div class="accept-checkbox">
+                    <div class="form-check">
+                        {{ form_widget(form.accepte_photos) }}
+                        {{ form_label(form.accepte_photos, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                    </div>
+                </div>
+                <div class="form-group text-center"> <!-- Ajout de la classe text-center ici -->
+                    <!-- Intégration du captcha -->
+                    <div class="g-recaptcha captcha-center" data-sitekey="6LdqhaUpAAAAAGBXxOHcKx6MAN_9NHCo8hE5JvGw"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group text-center">
+        {{ form_row(form.btn_submit) }}
+    </div>
+    {{ form_end(form) }} <!-- Balise de fin du formulaire -->
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    $(document).ready(function() {
+        $('[data-help]').hover(
+            function() {
+                var helpText = $(this).data('help');
+                $('<span class="password-help">' + helpText + '</span>').appendTo($(this).parent());
+            },
+            function() {
+                $('.password-help').remove();
+            }
+        );
+    });
+</script>
+{% endblock %}

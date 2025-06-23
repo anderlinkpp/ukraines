@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+
+<div class="marquee-rtl">
+    <!-- le contenu défilant -->
+    <div>- Jean M. 50€ - Donateur Anonyme 5€ - Marie S. 15€ </div>
+</div>
+<marquee behavior="scroll" direction="left">
+    Jean M. 50€ - Donateur Anonyme 5€ - Marie S. 15€ 
+</marquee>
+  
+<style>
+
+.section-photos {
+  margin-top: 2rem;
+}
+
+  body {
+    background: linear-gradient(to right,rgb(243, 242, 192), #f8f9fa);
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .event-image {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .event-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+  .event-description {
+    color: black;
+    font-size: 1rem;
+  }
+
+  .event-info-hover:hover {
+    text-decoration: underline;
+  }
+
+  .cs-button-6 {
+    background-color: #ffffff;
+    border: 2px solid #007bff;
+    color: #007bff;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+
+  .cs-button-6:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .cs-icon path {
+    stroke: currentColor;
+  }
+  .text-shadow-hover {
+  font-size: 2rem;
+  transition: text-shadow 0.3s ease;
+}
+ 
+</style>
+<div id="evenement-container">
+  {% for evenement in EvenementsInHomepage %}
+    <!-- Ton contenu HTML d'événement ici -->
+  {% endfor %}
+</div>
+     <div> 
+ 
+  </div>
+</div>
+
+<!-- Liste des événements -->
+{% for evenement in EvenementsInHomepage %}
+<div class="container mb-5">
+  <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start gap-4">
+    
+    <!-- Bloc principal -->
+    <div class="flex-fill" style="min-width: 0;">
+      <div class="row gy-3">
+        <div class="col-12 col-md-4 d-flex justify-content-center">
+        <a href="{{ path('app_archive')}}">
+          <img src="/uploads/{{ evenement.illustration }}" alt="{{ evenement.nom }}{{ evenement.nom }}"
+               class="img-fluid event-image"
+               style="max-height: 700px; object-fit: cover; width: 100%; max-width: 700px;"></a>
+        </div>
+        <div class="col-12 col-md-8">
+           <h2 class="event-title">{{ evenement.nom }}</h2>
+          <p class="event-description">{{ evenement.description|raw }}</p>
+     
+       <a href="{{ path('app_archive', { slug: evenement.slug }) }}" class="btn btn-primary mt-3">Voir détails</a>
+
+
+             
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloc info -->
+    <div class="text-center p-5" style="border: 1px solid #bdc3c7; border-radius: 8px; background-color:rgb(237, 241, 248);">
+      <div style="width: 250px; height: 250px;" class="bg-light p-3 rounded shadow-sm border">
+        <img src="/uploads/{{ evenement.image }}" alt="Annonce {{ evenement.nom }}"
+             class="img-fluid mb-2" style="max-height: 200px; object-fit: cover; width: 100%;">
+        <p class="event-info small mb-0 event-info-hover" style="color:rgb(237, 237, 238);">
+          {{ evenement.info|raw }}
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endfor %}
+ 
+{% endblock %}

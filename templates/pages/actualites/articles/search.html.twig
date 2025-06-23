@@ -1,0 +1,11 @@
+<form method="GET" action="{{ path('app_articles_by_searchbar') }}">
+	<div class="mb-3">
+		<h5 class="text-center">
+			<label for="search" class="form-label">Recherche d'article(s)</label>
+		</h5>
+		<div class="input-group">
+			<input type="text" class="form-control" id="search" name="search" placeholder="Recherchez ici...">
+			<button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>
+		</div>
+	</div>
+</form>

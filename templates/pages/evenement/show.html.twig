@@ -1,0 +1,21 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}{{ evenement.nom }}{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h1>{{ evenement.nom }}</h1>
+    <p><strong>Lieu :</strong> {{ evenement.lieu ?? 'Non précisé' }}</p>
+    <p><strong>Date :</strong> {{ evenement.dateDebut ? evenement.dateDebut|date('d/m/Y') : 'Non définie' }}</p>
+
+    {% if evenement.illustration %}
+        <img src="{{ asset('uploads/' ~ evenement.illustration) }}" class="img-fluid my-3" alt="{{ evenement.nom }}">
+    {% endif %}
+
+    <div>
+        {{ evenement.description|raw }}
+    </div>
+
+    <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3">⬅ Retour à l'accueil</a>
+</div>
+{% endblock %}

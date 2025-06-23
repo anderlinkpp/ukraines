@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ article.titre}}
+{% endblock %}
+
+{% block body %}
+	<style>
+	
+		img {
+			margin: 5px 20px;
+		}
+
+		figure.image {
+			display: inline-block;
+			border: 1px solid gray;
+			margin: 5px 20px;
+			background: #f5f2f0;
+		}
+
+		figure.align-left {
+			float: left;
+		}
+
+		figure.align-right {
+			float: right;
+		}
+
+		figure.image figcaption {
+			margin: 6px 8px;
+			text-align: center;
+		}
+
+	</style>
+
+	<div class="container py-4">
+		<div class="row">
+			<div>
+				{{ article.description|raw}}
+				
+				<div class="text-end">
+					<p>Article publié à
+						{{ article.datecreation|date("H:i") }}
+						le
+						{{ article.datecreation|date("d m Y") }}</p>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="text-end">
+				<button type="button" class="btn btn-primary">
+					<a href="{{ path('app_articles') }}" class="text-white text-decoration-none">
+						Voir tous les articles
+					</a>
+				</button>
+			</div>
+		</div>
+	</div>
+{% endblock %}

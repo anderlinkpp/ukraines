@@ -1,0 +1,13 @@
+<div>
+	<h5 class="text-center">
+		Filtre par catégorie
+	</h5>
+
+	{% for categorie in categories %}
+		<li class="mx-4">
+            <a href="{{ path('app_articles_by_category', {'permalien': categorie.permalien, 'categorie': categorie.nom}) }}" class="text-decoration-none">
+				{{ categorie.nom }}
+			</a>
+		</li>
+	{% endfor %}
+</div>

@@ -1,0 +1,53 @@
+ {% extends 'base.html.twig' %}
+
+{% block body %}
+ <style>
+.image-gauche {
+  float: left;
+  width: 400px;
+  height: 400px;
+  margin: 0 20px 20px 0;
+  /* Cadre carré avec coins arrondis */
+  border-radius: 15px;
+  /* Toujours gérer l’enroulement du texte autour de la forme carrée */
+  shape-outside: inset(0 round 15px);
+  shape-margin: 15px;
+  /* Image découpe pour correspondre à la forme */
+  clip-path: inset(0 round 15px);
+  object-fit: cover;
+}
+.texte-autour::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.container {
+  max-width: 800px;
+}
+  .bg-white {
+    background-color:;
+  }
+body {
+  background-color:rgb(243, 188, 188); /* ourgb(148, 220, 238) ourgb(124, 121, 83) selon ton esthétique */
+  color: #333;
+}
+
+.card {
+  background-color:rgb(245, 239, 152);
+  border: 1px solid #DDD;
+}
+
+</style>
+
+<div class="container my-5">
+ <p class="text-center text-muted"><strong>📍 Lieu :</strong> {{ archives.lieu }} | <strong>📅 Date :</strong> {{ archives.dateDebut|date('d/m/Y') }}</p>
+  <div class="texte-autour">
+   <img src="{{ asset('uploads/' ~ archives.illustration) }}"
+         alt="{{ archives.name }}"
+         class="image-gauche">
+    <h4>{{ archives.name }}</h4>
+    <p>{{ archives.description|raw }}</p>
+  </div>
+</div>
+
+{% endblock %}

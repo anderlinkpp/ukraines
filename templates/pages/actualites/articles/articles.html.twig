@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Articles
+{% endblock %}
+
+{% block body %}
+
+<div id="banner-712">
+    <div class="cs-container">
+        <span class="cs-int-title">
+            {% if app.request.query.get('search')  %}
+                Résultat(s) pour "{{ app.request.query.get('search') }}"
+            {% elseif app.request.query.get('categorie') %}
+                Résultat(s) pour la catégorie "{{ app.request.query.get('categorie') }}"
+            {% elseif app.request.query.get('year') and app.request.query.get('month') %}
+                Articles publiés le {{ app.request.query.get('month') }}/{{ app.request.query.get('year') }}
+            {% elseif app.request.query.get('year') %}
+                Articles publiés en {{ app.request.query.get('year') }}
+            {% else %}
+                Derniers articles 
+            {% endif %}
+        </span>
+    </div>
+    <!--Background Image-->
+    <picture class="cs-background">
+        <!--Mobile Image-->
+        <source media="(max-width: 600px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FMISC%2Fpills.jpg">
+        <!--Tablet and above Image-->
+        <source media="(min-width: 601px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FMISC%2Fpills.jpg">
+        <img loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FMISC%2Fpills.jpg" alt="pills" width="1280" height="568" aria-hidden="true">
+    </picture>
+</div>
+
+	<div class="container py-4">
+
+        <div class="container">
+            <div class="row">
+                <div class="d-flex align-items-center justify-content-center">
+                    {{ knp_pagination_render(articles) }}
+                </div>
+            </div>
+        </div>
+
+		<div class="row">
+			<div class="col-md-8">
+				<hr>
+                {% if articles is empty %}
+                    <p>Aucune article trouvé.</p>
+                    <button type="button" class="btn btn-primary">
+                        <a href="{{ path('app_articles') }}" class="text-white text-decoration-none">
+                            Voir tous les articles
+                        </a>
+                    </button>
+                {% else %}
+                    {% for article in articles %}
+                        {% if article.activation == 1 %}
+                            <div class="row gx-5">
+                                <div class="col-md-4">
+                                    <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
+                                        {% if article.image is empty %}
+                                            <img src="https://fastly.picsum.photos/id/1058/200/200.jpg?hmac=EF_mUeWbCxK5wJj7PuNrLKm7kBMu2DBtQXuGQg6p_gA" class="img-fluid" />
+                                        {% else %}
+                                            {% for image in article.image %}
+                                                <img src="{{ asset('assets/images/' ~ image.url) }}" class="img-fluid w-100" title="{{ image.nom }}" style="max-width: 200px;"/>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-8 d-flex flex-column justify-content-between">
+                                    <h4>
+                                        <strong>
+                                            {{ article.titre}}
+                                        </strong>
+                                    </h4>
+                                    <p class="text-muted">
+                                        {{ article.courtedescription }}
+                                    </p>
+                                    <div class="text-end mt-auto">
+                                        <button type="button" class="btn btn-primary">
+                                            <a href="{{ path('app_article', { 'permalien': article.permalien }) }}" class="btn btn-primary">
+                                                Voir cet article
+                                            </a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+			</div>
+            
+			<div class="col-md-4">
+				<div class="position-sticky m-4">
+					{% include "pages/actualites/articles/search.html.twig" %}
+                    <hr>
+                    {% include 'pages/actualites/articles/categories_list.html.twig' %}
+                    <hr>
+                    {% include "pages/actualites/articles/archives.html.twig" %}
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="d-flex align-items-center justify-content-center">
+                {{ knp_pagination_render(articles) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+<form action="{{ path('app_articles_by_date') }}" method="GET">
+    <h5 class="text-center" >
+        Filtre par date
+    </h5>
+    
+    <div class="input-group">
+        <select class="form-select" name="year">
+            {% set current_year = "now"|date("Y") %}
+            {% for year in current_year..2020 %}
+                <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
+        <select class="form-select" name="month">
+            <option value="0"></option>
+            {% for month in 1..12 %}
+                {% set date = "2016-" ~ month ~ "-01" %}
+                <option value={{ month }}>{{ month }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+
+</form>

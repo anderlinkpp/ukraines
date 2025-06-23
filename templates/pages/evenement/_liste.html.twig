@@ -1,0 +1,45 @@
+ {% for evenement in evenements %}
+  <div class="container mb-5">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start gap-4">
+      
+      <!-- Bloc principal -->
+      <div class="flex-fill" style="min-width: 0;">
+        <div class="row gy-3">
+          <div class="col-12 col-md-4 d-flex justify-content-center">
+            <img src="/uploads/{{ evenement.illustration }}" alt="{{ evenement.nom }}"
+                 class="img-fluid event-image"
+                 style="max-height: 200px; object-fit: cover; width: 100%; max-width: 300px;">
+          </div>
+          <div class="col-12 col-md-8">
+            <h2 class="event-title">{{ evenement.nom }}</h2>
+            <p class="event-description">{{ evenement.description|raw }}</p>
+            <a href="{{ path('app_archive', { slug: evenement.slug }) }}"
+               class="cs-button-6 d-inline-flex align-items-center mt-3">
+              Découvrir
+              <svg class="cs-icon ms-2" viewBox="0 0 20 20" fill="none" width="20" height="20">
+                <path d="M5 10h10M10 5l5 5-5 5" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloc info -->
+      <div class="text-center p-5" style="border: 4px solid #bdc3c7; border-radius: 8px; background-color:rgb(182, 206, 248);">
+        <div style="width: 250px; height: 250px;" class="bg-light p-3 rounded shadow-sm border">
+          <img src="/uploads/{{ evenement.image }}" alt="Annonce {{ evenement.nom }}"
+               class="img-fluid mb-2" style="max-height: 100px; object-fit: cover; width: 100%;">
+          <p class="event-info small mb-0 event-info-hover" style="color: #2c3e50;">
+            {{ evenement.info|raw }}
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+{% else %}
+  <div class="text-center my-5">
+    <p>Aucun événement trouvé selon les filtres sélectionnés.</p>
+  </div>
+{% endfor %}

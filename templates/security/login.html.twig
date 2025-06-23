@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block stylesheets %}
+
+    		    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+                <link rel="stylesheet" href="{{ asset('//db.onlinewebfonts.com/c/a4e256ed67403c6ad5d43937ed48a77b?family=Core+Sans+N+W01+35+Light') }}" type="text/css" />
+
+{% endblock %}
+
+{% block body %}
+
+<div class="body-content">
+    <div class="title-container"> <!-- Conteneur pour le titre -->
+        <h3 class="text-center mb-4">Connexion</h3> <!-- Titre -->
+    </div>
+ 
+<form method="post" class="form-login" autocomplete="off">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Vous êtes connecté en tant que: {{ app.user.userIdentifier }}, 
+            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        </div>
+    {% endif %}
+
+    
+    <label for="inputUsername">Pseudo</label>
+    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+    <label for="inputPassword">Mot de passe</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" name="_remember_me"> Remember me
+        </label>
+    </div>
+
+    <button class="btnLog btnLog-lg btnLog-primary" type="submit">
+        Connexion
+    </button>
+</form>
+{% endblock %}

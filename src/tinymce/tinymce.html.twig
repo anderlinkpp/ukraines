@@ -1,0 +1,81 @@
+{# 
+  Template de personnalisation de TinyMCE Editor 
+  https://www.tiny.cloud/
+#}
+
+{% block _Articles_tinymce_widget %}
+
+<div class="ea-text-editor-wrapper">
+	<textarea id="{{ id }}" class="ea-text-editor-textarea" name="{{ full_name }}">{{ value }}</textarea>
+</div>
+
+{# CDN #}
+<script src="https://cdn.tiny.cloud/1/avrycesgj13gls8lnkymp4g657e69prnnsr0nr8epg8ptpif/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+{# local #}
+{# <script src="../../vendor/tinymce/tinymce/tinymce.js" referrerpolicy="origin"></script> #}
+
+{# Initialisation TinyMCE sur textarea #}
+<script>
+	tinymce.init({
+    // license_key: 'gpl',
+    // resize: 'both',
+    selector: 'textarea',
+    language: 'fr_FR',
+    plugins: [ 
+      'accordion', 'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 
+      'fullscreen', 'image', 'link', 'lists advlist', 'media', 'preview', 
+      'searchreplace', 'table', 'visualblocks', 'wordcount'
+    ],
+    toolbar: 'preview fullscreen visualblocks | image link media | undo redo | blocks fontfamily fontsize | ' + 
+    'bold italic underline | table mergetags | ' + 
+    'alignleft aligncenter alignright alignjustify lineheight | ' + 
+    'checklist numlist bullist indent outdent',
+        
+    // UPLOAD MANUEL
+    image_title: true,
+    /* enveloppe dans un élément figure HTML5 avec une balise figcaption à l'intérieur */
+    image_caption: true,
+    /* enable automatic uploads of images represented by blob or data URIs */
+    automatic_uploads: true,
+    /*
+      URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
+      images_upload_url: 'postAcceptor.php',
+      here we add custom filepicker only to Image dialog
+    */
+    file_picker_types: 'image',
+    /* and here's our custom image picker*/
+    file_picker_callback: (cb, value, meta) => {
+      const input = document.createElement('input');
+      input.setAttribute('type', 'file');
+      input.setAttribute('accept', 'image/*');
+
+      input.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+          /*
+            Note: Now we need to register the blob in TinyMCEs image blob
+            registry. In the next release this part hopefully won't be
+            necessary, as we are looking to handle it internally.
+          */
+          const id = 'blobid' + (new Date()).getTime();
+          const blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+          const base64 = reader.result.split(',')[1];
+          const blobInfo = blobCache.create(id, file, base64);
+          blobCache.add(blobInfo);
+
+          /* call the callback and populate the Title field with the file name */
+          cb(blobInfo.blobUri(), { title: file.name });
+        });
+
+        reader.readAsDataURL(file);
+      });
+
+      input.click();
+    },
+    
+    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+  });
+</script>
+{% endblock _Articles_tinymce_widget %}

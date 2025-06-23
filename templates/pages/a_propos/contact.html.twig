@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Nous contacter
+{% endblock %}
+
+{% block body %}
+	<section class="container pt-5">
+		<div class="row">
+			<div class="col-12 col-md-5 mx-auto mt-5 order-2 order-md-1">
+				<img src="{{ asset('assets/images/fontaines-nancy-place-stanislas.jpg') }}" title="">
+			</div>
+			<div class="col-12 col-md-5 mx-auto mt-5 p-5 order-1 order-md-2">
+				<h4 class="text-center mb-5">Nous contacter</h4>
+				{# <p>Lieu</p> #}
+				<p>2 Rue de Badonviller</p>
+				<p>54 000, Nancy</p>
+				<p>
+					<i class="fa-solid fa-phone"></i>
+					(+33) 6 XX XX XX XX</p>
+				<p>
+					<a href="mailto:email@example.com" class="text-decoration-none">
+						<i class="fa-solid fa-at"></i>
+						Envoyer un Email
+					</a>
+				</p>
+				<p>
+					<a href="https://www.google.fr/maps/place/2+Rue+de+Badonviller,+54000+Nancy/@48.691934,6.1450896,17z/data=!3m1!4b1!4m6!3m5!1s0x4794a29465c687b9:0xf5e38e4fddd4ac87!8m2!3d48.691934!4d6.1476645!16s%2Fg%2F11c1cmd0jw?entry=ttu" 
+						target="_blank" class="text-decoration-none">
+						<i class="fa-solid fa-location-dot"></i>
+						Voir sur Google Maps
+					</a>
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<style>
+		@media(min-width: 768px) {
+			section {
+				height: 70vh;
+			}
+		}
+
+		img {
+			height: 100%;
+			width: 100%;
+		}
+	</style>
+{% endblock %}
+

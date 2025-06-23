@@ -1,0 +1,30 @@
+ {% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">{{ archive.nom }}</h1>
+    <p class="text-center text-muted"><strong>📍 Lieu :</strong> {{ archive.lieu }} | <strong>📅 Date :</strong> {{ archive.dateDebut|date('d/m/Y') }}</p>
+
+    <div class="row mt-4">
+        <!-- Image à gauche -->
+        <div class="col-md-6">
+           <a href="{{ asset('uploads/' ~ archive.illustration) }}" target="_blank">
+    <img src="{{ asset('uploads/' ~ archive.illustration) }}" class="card-img-top" alt="{{ archive.nom }}">
+</a>
+
+        </div>
+
+        <!-- Description à droite -->
+        <div class="col-md-6 d-flex align-items-center">
+            <div>
+                <h4>Description</h4>
+                <div class="text-muted" style="line-height: 1.6;">
+                    {{ archive.description|raw }}
+                </div>
+                <a href="{{ path('app_home') }}" class="btn btn-outline-primary mt-4">⬅ Retour à l'accueil</a>
+                 <a href="{{ path('app_archive') }}" class="btn btn-outline-primary mt-4">⬅ Retour à l'archive</a>
+            </div>
+        </div>
+    </div> 
+</div>
+{% endblock %}

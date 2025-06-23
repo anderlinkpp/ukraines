@@ -1,0 +1,24 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}Liste des événements{% endblock %}
+
+{% block body %}
+    <h1>Liste des événements</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.motCle) }}
+        {{ form_row(form.rechercher) }}
+    {{ form_end(form) }}
+
+    <ul>
+        {% for evenement in evenements %}
+            <li>
+                <h3>{{ evenement.titre }}</h3>
+                <p>{{ evenement.description|slice(0, 150) }}...</p>
+                <a href="{{ path('evenements_detail', { slug: evenement.slug }) }}">Voir l'événement</a>
+            </li>
+        {% else %}
+            <li>Aucun événement trouvé.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

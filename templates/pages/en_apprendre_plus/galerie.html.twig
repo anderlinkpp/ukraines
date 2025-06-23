@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Galerie
+{% endblock %}
+
+{% block body %}
+
+	<section class="section-galerie">
+	    <div id="banner-712">
+			<div class="cs-container">
+				<span class="cs-int-title">Notre galerie</span>
+			</div>
+        	<!--Background Image-->
+			<picture class="cs-background">
+				<!--Mobile Image-->
+				<source media="(max-width: 600px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FMISC%2Fpills.jpg">
+				<!--Tablet and above Image-->
+				<source media="(min-width: 601px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FMISC%2Fpills.jpg">
+				<img loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FMISC%2Fpills.jpg" alt="pills" width="1280" height="568" aria-hidden="true">
+			</picture>
+    	</div>
+
+		<h2 class="container">Photos de nos événements récents</h2>
+		<div class="grid-photos mb-4 container-fluid">
+			{% for image in images|sort((b, a) => a.dateEvenement <=> b.dateEvenement) %}
+				{% if image.activation == 1 %}
+					{% if image.dateEvenement %}
+						<a href="{{ asset('assets/images/' ~ image.url) }}" class="lien-conteneur-photo">
+							<img src="{{ asset('assets/images/' ~ image.url) }}" alt="{{ image.textealternatif }}">
+							<div class="photo-hover">Voir la photo</div>
+						</a>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</div>
+
+		{# <h2 class="container">Photos de nos événements récents</h2>
+		<sl-carousel loop navigation pagination class="container">
+			{% for image in images|sort((b, a) => a.dateEvenement <=> b.dateEvenement) %}
+				{% if image.activation == 1 %}
+					{% if image.dateEvenement %}
+						<sl-carousel-item>
+							<img
+								alt="{{ image.textealternatif }}"
+								src="{{ asset('assets/images/' ~ image.url) }}"
+							/>
+						</sl-carousel-item>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</sl-carousel> #}
+
+
+		{# <h2 class="container">Photos de l'associations</h2>
+		<div class="grid-photos mb-4 container-fluid">
+			{% for image in images %}
+				{% if image.activation == 1 %}
+					{% if image.dateEvenement is empty %}
+						<a href="{{ asset('assets/images/' ~ image.url) }}" class="lien-conteneur-photo">
+							<img src="{{ asset('assets/images/' ~ image.url) }}" alt="{{ image.textealternatif }}">
+							<div class="photo-hover">Voir la photo</div>
+						</a>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</div> #}
+
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css" />
+		<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
+
+		<h2 class="container">Toutes nos photos</h2>
+		<sl-carousel loop navigation pagination class="container">
+			{% for image in images %}
+				{% if image.activation == 1 %}
+					<sl-carousel-item>
+						<img
+							alt="{{ image.textealternatif }}"
+							src="{{ asset('assets/images/' ~ image.url) }}"
+						/>
+					</sl-carousel-item>
+				{% endif %}
+			{% endfor %}
+		</sl-carousel>
+
+
+		{# <h2 class="container">Toute les photos</h2>
+		<div class="grid-photos mb-4 container-fluid">
+			{% for image in images %}
+				{% if image.activation == 1 %}
+					<a href="{{ asset('assets/images/' ~ image.url) }}" class="lien-conteneur-photo">
+						<img src="{{ asset('assets/images/' ~ image.url) }}" alt="{{ image.textealternatif }}">
+						<div class="photo-hover">Voir la photo</div>
+					</a>
+				{% endif %}
+			{% endfor %}
+		</div> #}
+	</section>
+
+	<style>
+		.section-galerie {
+			background-color: white;
+		}
+
+		.section-galerie h2 {
+			color: #242424;
+			margin-bottom: 80px;
+			margin-top: 40px;
+		}
+
+		.grid-photos {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			gap: 15px;
+			/* display: grid; */
+			/* grid-template-columns: 1fr 1fr 1fr;
+			grid-template-rows: 300px 300px 300px;
+			gap: 15px; */
+		}
+
+		.grid-photos img {
+			width: 500px;
+			height: 300px;
+			object-fit: cover;
+		}
+
+		.lien-conteneur-photo {
+			position: relative;
+		}
+
+		.photo-hover {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.5em;
+			color: white;
+			background-color: rgba(0, 0, 0, 0.7);
+			display: none;
+		}
+
+		.lien-conteneur-photo:hover .photo-hover {
+			display: flex;
+		}
+
+		@media (max-width: 996px) {
+			.grid-photos {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 15px;
+			}
+
+			.grid-photos img {
+			width: 100%;
+			height: 300px;
+			object-fit: cover;
+			}
+		}
+
+	</style>
+
+{% endblock %}

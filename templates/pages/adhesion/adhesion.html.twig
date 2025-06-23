@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Devenir adhérent
+{% endblock %}
+
+{% block body %}
+
+<div id="banner-712">
+  <div class="cs-container">
+    <span class="cs-int-title">Devenir adhérent</span>
+  </div>
+    <!--Background Image-->
+  <picture class="cs-background">
+    <!--Mobile Image-->
+    <source media="(max-width: 600px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FMISC%2Fpills.jpg">
+    <!--Tablet and above Image-->
+    <source media="(min-width: 601px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FMISC%2Fpills.jpg">
+    <img loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FMISC%2Fpills.jpg" alt="pills" width="1280" height="568" aria-hidden="true">
+  </picture>
+</div>
+
+<div id="loading-overlay">
+  <div class="loader"></div>
+</div>
+
+<iframe id="haWidget" allowtransparency="true" scrolling="auto" class="m-5"
+    src="https://www.helloasso.com/associations/les-lumieres-d-ukraine/adhesions/formulaire-d-adhesion/widget" 
+    style="width: 95%; height: 750px; border: none;">
+</iframe>
+
+<style>
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 9999; /* Assure que l'élément est au-dessus de tout le reste */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;            /* Gris clair pour la bordure */
+  border-top: 8px solid #3498db;        /* Bleu pour le dessus */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;   /* Animation de rotation */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var iframe = document.getElementById("haWidget");
+  var loadingOverlay = document.getElementById("loading-overlay");
+
+  iframe.addEventListener("load", function() {
+    // Cache l'animation de chargement lorsque l'iframe est chargé
+    loadingOverlay.style.display = "none";
+    // Affiche l'iframe
+    iframe.style.display = "block";
+  });
+});
+</script>
+{% endblock %}

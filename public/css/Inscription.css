@@ -1,0 +1,151 @@
+h3 {
+    font-size: 2em;
+    font-family: "Core Sans N W01 35 Light";
+    font-weight: normal;
+    margin: .67em 0;
+    display: block;
+}
+
+.module {
+    position: relative;
+    top: 10%;
+    height: 65%;
+    width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #fff;
+    background-color: #19547c;
+    font-family: helvetica;
+    padding: 30px;
+    border-radius: 10px;
+
+}
+
+
+select:hover,
+textarea:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    background-color: #214057;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+select:focus,
+textarea:focus {
+    border: 2px solid;
+    border-color: #1e5f99;
+    background-color: #63737d;
+    color: #1544ee;
+}
+
+.btnIns {
+    
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 15px ;
+    font-size: 15px;
+    line-height: 20px;
+    height: 34px;
+    background-color: rgba(0, 0, 0, 0.15);
+    color: #00aeff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 rgba(0, 0, 0, 0);
+    border-radius: 2px;
+    -webkit-transition: background-color 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btnIns.active,
+.btnIns:active {
+    padding: 7px 19px 5px 21px;
+}
+
+.btnIns.disabled:active,
+.btnIns[disabled]:active,
+.btnIns.disabled.active,
+.btnIns[disabled].active {
+    padding: 6px 20px !important;
+}
+
+.btnIns:hover,
+.btnIns:focus {
+    background-color: rgba(15, 15, 15, 0.25);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 rgba(0, 0, 0, 0);
+}
+
+.btnIns:active,
+.btnIns.active {
+    background-color: rgba(254, 254, 254, 0.15);
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.07);
+    box-shadow: inset 1.5px 1.5px 3px rgba(0, 0, 0, 0.5);
+}
+
+.btnIns-primary {
+    
+    background-color: #098cc8;
+    color: #ffffff;
+    border: 1px solid transparent;
+    box-shadow: 0 0 rgba(0, 0, 0, 0);
+    border-radius: 2px;
+    -webkit-transition: background-color 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s, color 0.2s;
+    background-image: -webkit-linear-gradient(top, #0f9ada, #0076ad);
+    background-image: linear-gradient(to bottom, #0f9ada, #0076ad);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+}
+
+.btnIns-primary:hover,
+.btnIns-primary:focus {
+    background-color: #21b0f1;
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 0 rgba(0, 0, 0, 0);
+}
+
+.btnIns-primary:active,
+.btnIns-primary.active {
+    background-color: #006899;
+    color: rgba(255, 255, 255, 0.7);
+    border-color: transparent;
+    box-shadow: inset 1.5px 1.5px 3px rgba(0, 0, 0, 0.5);
+}
+
+.btnIns-primary:hover,
+.btnIns-primary:focus {
+    background-image: -webkit-linear-gradient(top, #37c0ff, #0097dd);
+    background-image: linear-gradient(to bottom, #37c0ff, #0097dd);
+}
+
+.btnIns-primary:active,
+.btnIns-primary.active {
+    background-image: -webkit-linear-gradient(top, #006ea1, #00608d);
+    background-image: linear-gradient(to bottom, #006ea1, #00608d);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6) inset, 0 0 0 1px rgba(255, 255, 255, 0.07) inset;
+}
+
+.btnIns-block {
+    width: 60%;
+}
+
+.accept-checkbox {
+
+    margin-top: 10px;
+    font-size: 10pt;
+}
+
+.captcha-center {
+    display: inline-block;
+}
+
+
+.text-danger {
+    color: #f6f5f5;
+}
+
+.password-help {
+    font-size: 0.8em;
+    color: #f95465;
+}

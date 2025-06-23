@@ -1,0 +1,131 @@
+   {% extends 'base.html.twig' %}
+
+{% block body %}
+ 
+<div class="container my-5">
+    <h1 class="mb-4 text-center"> Événements</h1>
+    <div class="row">
+        {% for archive in ArchiveInHomepage %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+ <a href="{{ path('app_archive_show', { id: archive.id }) }}">
+    <img src="{{ asset('uploads/' ~ archive.illustration) }}" class="card-img-top" alt="{{ archive.nom }}">
+</a>
+
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ archive.nom }}</h5>
+                        <h6 class="gradient-text">{{ archive.lieu }}</h6>
+
+                        {% if archive.dateEvenement is defined %}
+                            <p class="card-text">
+                                📅 {{ archive.dateDebut|date('d/m/Y') }}
+                            </p>
+                        {% endif %}
+                    <a href="{{ path('app_archive_show', { id: archive.id }) }}" class="btn btn-primary mt-3">
+                           🔍 Voir les détails
+                           </a>
+                        
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p class="text-center">Aucune archive disponible pour le moment.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+ 
+
+
+<style>
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.card-img-top {
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.1);
+}
+
+.card-body {
+  position: relative;
+  z-index: 2;
+}
+
+.card-title {
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #004085;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #555;
+}
+
+.text-muted {
+  font-style: italic;
+  color: #666;
+}
+.gradient-text {
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+} .card-title {
+  position: relative;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #004085;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card-title::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background: #2575fc;
+  transition: width 0.3s ease;
+}
+
+.card-title:hover::after {
+  width: 100%;
+}
+ body {
+  background-image: url("{{ asset('assets/images/record.jpg') }}");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f2f6fb;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+
+</style>
+{% endblock %}

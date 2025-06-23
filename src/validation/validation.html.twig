@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}validation{% endblock %}
+
+{% block body %}
+
+    <h1>Validation de compte</h1>
+    <p>Pour valider votre compte, veuillez cliquer sur le lien suivant :</p>
+    <!--<a href="{{ path('app_validation', {'email': email, 'token': token}) }}">Valider mon compte</a>-->
+    
+    <a href="http://localhost:3000/lumieres_vf/public/index.php/validation/{{ email }}/{{ token }}">Valider mon compte</a>
+
+
+{% endblock %}

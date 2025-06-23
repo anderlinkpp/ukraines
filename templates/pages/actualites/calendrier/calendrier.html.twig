@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+{# DOC COMPLETE DE FULLCALENDAR:
+https://fullcalendar.io/docs #}
+{% block title %}
+	Calendrier
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        #calendrier{
+            width: 80%;
+            margin: 20px auto;
+            height: 80vh;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div id="calendrier">
+    </div>
+
+    <div id="calendarModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="modalTitle" class="modal-title"></h4>
+                </div>
+                <div id="modalBody" class="modal-body"> 
+                </div>
+                <div id="modalFooter" class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="buttonToHide">
+                        <a href="#" id="modalLink" target="_blank" class="text-light text-decoration-none">Voir l'article</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js" integrity="sha256-i4vDW9EgtaJmeauDDymtNF2omPZ1fCKpf4w1gBlU1IE=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.11/locales-all.global.js" integrity="sha256-fNyxxFtyUOCG+hHnCBys6VAi0/3Lfk0pAeZKIC2PPL0=" crossorigin="anonymous"></script>
+<script>
+    let eventsJSON = {{ events|raw }}
+
+    window.onload = () => {
+        let calendarElement = document.querySelector("#calendrier")
+
+        let calendar = new FullCalendar.Calendar(calendarElement, {
+            initialView: 'dayGridMonth',
+            locale: 'fr',
+            timeZone: 'Europe/Paris',
+            firstDay: 1,
+            // editable: true,
+            // eventResizableFromStart: true,
+            headerToolbar: {
+                start: 'prev,next today',
+                center: 'title',
+                end: 'dayGridMonth,timeGridWeek'
+            },
+            footerToolbar: {
+                start: 'prev',
+                end: 'next'
+            },
+            events: eventsJSON, 
+            eventClick: function(info) {
+                $('#modalTitle').html(info.event.title);
+                $('#modalBody').html(info.event.extendedProps.description);
+
+                let permalink = info.event.extendedProps.permalien;
+                let articleUrl = '{{ path('app_article', {'permalien': 'PERMALIEN'}) }}'.replace('PERMALIEN', permalink);
+                
+                if (permalink) {
+                    $('#buttonToHide').show();
+                    $('#modalLink').attr('href', articleUrl);
+                } else {
+                    $('#buttonToHide').hide();
+                    $('#modalLink').attr('disabled', true);
+                }
+
+                $('#calendarModal').modal('show');
+            },
+        })
+
+        calendar.render()
+    }
+</script>
+{% endblock %}

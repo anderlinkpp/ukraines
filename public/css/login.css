@@ -1,0 +1,63 @@
+h3 {
+    font-size: 2em;
+    font-family: "Core Sans N W01 35 Light";
+    font-weight: normal;
+    margin: .67em 0;
+    display: block;
+}
+
+.body-content {
+    position: relative;
+    top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background: transparent;
+}
+
+.form-login {
+    position: relative;
+    width: 250px;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #19547c;
+    border-radius: 10px;
+    font-family: helvetica;
+    color: #fff;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #214057;
+    background-color: #63737d;
+    color: #fff;
+}
+
+.form-control:focus {
+    border-color: #1e5f99;
+    background-color: #63737d;
+    color: #1544ee;
+}
+
+.checkbox {
+    margin-bottom: 10px;
+}
+
+.btnLog {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #098cc8;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btnLog:hover {
+    background-color: #21b0f1;
+}
